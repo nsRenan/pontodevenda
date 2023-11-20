@@ -1,0 +1,639 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Products",
+    "description": "Documentation from products api",
+    "version": "1.0.0"
+  },
+  "basePath": "/",
+
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  },
+
+  "paths": {
+    "/categoria": {
+      "get": {
+        "description": "Rota para listar todas as categorias de produtos",
+        "sumary": "",
+        "tags": ["Categorias"],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {"description": "Rota de login",
+      "sumary": "",
+      "tags": ["Login"],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "email": {
+                  "type": "string"
+                },
+                "senha": {
+                  "type": "string"
+                }
+              },
+              "example": {
+                "email": "Joao.Maria@email.com",
+                "senha": "senha123"
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "400": {
+          "description": "Email/Senha incorreto"
+        },
+        "200": {
+          "description": "OK"
+        }
+      }
+      }
+    },
+
+    "/usuario": {
+      "post": {
+        "description": "Rota para cadastrar um novo usuario",
+        "sumary": "",
+        "tags": ["Usuario"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "senha": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "nome": "Joao Maria",
+                  "email": "Joao.Maria@email.com",
+                  "senha": "senha123"
+                }
+              }
+            }
+          }
+        },
+        
+      "responses": {
+        "400": {
+          "description": "Esse usuario já existe"
+        },
+        "200": {
+          "description": "OK"
+        }
+      }
+      },
+      "get":{
+        "description": "Rota para detalhar perfil do usuario logado",
+        "sumary": "",
+        "security": [{"bearerAuth": []}],
+        "tags": ["Usuario"],
+        
+      "responses": {
+        "401": {
+          "description": "Usuario não logado"
+        },
+        "200": {
+          "description": "OK"
+        }
+      }
+
+      },
+      "put":{
+        "description": "Rota para atualizar perfil do usuario logado",
+        "sumary": "",
+        "security": [{"bearerAuth": []}],
+        "tags": ["Usuario"],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "senha": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "nome": "Joao Maria",
+                  "email": "Joao.Maria@email.com",
+                  "senha": "senha123"
+                }
+              }
+            }
+          }
+        },
+        
+      "responses": {
+        "401": {
+          "description": "Usuario não logado"
+        },
+        "400":{
+          "description":"Esse email já está cadastrado"
+        },
+        "200": {
+          "description": "OK"
+        }
+      }
+
+      }
+    },
+    "/produto": {
+      "post": {"description": "Rota de cadastro de produto",
+      "sumary": "",
+      "tags": ["Produto"],
+      "security": [{"bearerAuth": []}],
+      "requestBody": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "descricao": {
+                  "type": "string"
+                },
+                "quantidade_estoque": {
+                  "type": "number"
+                },
+                "valor": {
+                  "type": "number"
+                },
+                "categoria_id": {
+                  "type": "number"
+                }
+              },
+              "example": {
+                  "descricao": "Moto G8 Plus",
+                  "quantidade_estoque": 10,
+                  "valor": 150000,
+                  "categoria_id": 2
+              }
+            }
+          }
+        }
+      },
+      "responses": {
+        "401": {
+          "description": "Usuario não autorizado"
+        },
+        "400": {
+          "description": "Todos dados são obrigatorios"
+        },
+        "200": {
+          "description": "OK"
+        }
+      }
+      },
+      "get":{
+        "description": "Rota para listar todos produtos de uma categoria",
+        "sumary": "",
+        "security": [{"bearerAuth": []}],
+        "tags": ["Produto"],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "Categoria Para consulta",
+            "description": "Passe o id sa categoria para listar todos os produtos pertencentes",
+            "required": true,
+            "type": "string",
+            "examples": {
+              "Exemplo1": {
+                "value": "1"
+              },
+              "Exemplo2": {
+                "value": "2"
+              }
+            }
+          }
+        ],
+        
+      "responses": {
+        "401": {
+          "description": "Usuario não logado"
+        },
+        "400":{
+          "description":"Esse email já está cadastrado"
+        },
+        "200": {
+          "description": "OK"
+        }
+      }
+
+      }
+    },
+    "/produto/{id}": {
+      "put": {
+        "summary": "Atualizar informações do produto",
+        "tags": ["Produto"],
+        "security": [{"bearerAuth": []}],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do produto a ser atualizado",
+            "required": true,
+            "schema": {
+              "type": "integer" 
+            },
+            "examples": {
+              "Exemplo1": {
+                "value": "1"
+              },
+              "Exemplo2": {
+                "value": "2"
+              }
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "descricao": {
+                    "type": "string"
+                  },
+                  "quantidade_estoque": {
+                    "type": "integer"
+                  },
+                  "valor": {
+                    "type": "number"
+                  },
+                  "categoria_id": {
+                    "type": "integer"
+                  }
+                },
+                "example": {
+                  "descricao": "Moto G8 Plus",
+                  "quantidade_estoque": 8,
+                  "valor": 150000,
+                  "categoria_id": 2
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Usuário não autorizado"
+          },
+          "400": {
+            "description": "Produto não encontrado"
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "summary": "Detalhar Produto ",
+        "tags": ["Produto"],
+        "security": [{"bearerAuth": []}],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do produto a ser detalhado",
+            "required": true,
+            "schema": {
+              "type": "integer" 
+            },
+            "examples": {
+              "Exemplo1": {
+                "value": "1"
+              },
+              "Exemplo2": {
+                "value": "2"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Usuário não autorizado"
+          },
+          "400": {
+            "description": "Produto não encontrado"
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete" : {
+        "summary": "Deletar Produto ",
+        "tags": ["Produto"],
+        "security": [{"bearerAuth": []}],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID do produto a ser deletado",
+            "required": true,
+            "schema": {
+              "type": "integer" 
+            },
+            "examples": {
+              "Exemplo1": {
+                "value": "1"
+              },
+              "Exemplo2": {
+                "value": "2"
+              }
+            }
+          }
+        ],
+        "responses": {
+          "401": {
+            "description": "Usuário não autorizado"
+          },
+          "400": {
+            "description": "Produto não encontrado"
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+
+      } 
+      },
+
+      "/cliente": {
+        "post": {"description": "Rota de cadastro de clientes",
+        "sumary": "",
+        "tags": ["Cliente"],
+        "security": [{"bearerAuth": []}],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "cpf": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                    "nome": "Maria José",
+                    "email": "Maria.José@email.com",
+                    "cpf": "12345678900"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "401": {
+            "description": "Usuario não autorizado"
+          },
+          "400": {
+            "description": "Todos dados são obrigatorios"
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+        },
+        "get":{
+          "description": "Rota para listar os clientes cadastrados",
+          "sumary": "",
+          "security": [{"bearerAuth": []}],
+          "tags": ["Cliente"],
+          
+        "responses": {
+          "401": {
+            "description": "Usuario não logado"
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+  
+        }
+      },
+      "/cliente/{id}": {
+        "put": {
+          "summary": "Atualizar informações do cliente",
+          "tags": ["Cliente"],
+          "security": [{"bearerAuth": []}],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "ID do cliente a ser atualizado",
+              "required": true,
+              "schema": {
+                "type": "integer" 
+              },
+              "examples": {
+                "Exemplo1": {
+                  "value": "1"
+                },
+                "Exemplo2": {
+                  "value": "2"
+                }
+              }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "nome": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "cpf": {
+                      "type": "string"
+                    }
+                  },
+                  "example": {
+                      "nome": "Maria José",
+                      "email": "Maria.José@email.com",
+                      "cpf": "12345678900"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "401": {
+              "description": "Usuário não autorizado"
+            },
+            "400": {
+              "description": "Cliente não encontrado"
+            },
+            "200": {
+              "description": "OK"
+            }
+          }
+        },
+        "get": {
+          "summary": "Detalhar Cliente ",
+          "tags": ["Cliente"],
+          "security": [{"bearerAuth": []}],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "ID do Cliente a ser detalhado",
+              "required": true,
+              "schema": {
+                "type": "integer" 
+              },
+              "examples": {
+                "Exemplo1": {
+                  "value": "1"
+                },
+                "Exemplo2": {
+                  "value": "2"
+                }
+              }
+            }
+          ],
+          "responses": {
+            "401": {
+              "description": "Usuário não autorizado"
+            },
+            "400": {
+              "description": "Cliente não encontrado"
+            },
+            "200": {
+              "description": "OK"
+            }
+          }
+        }
+      },
+
+      "/pedido": {
+        "post": {
+          "description": "Rota de cadastro de pedido",
+          "tags": ["Pedido"],
+          "security": [{"bearerAuth": []}],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "cliente_id": {
+                      "type": "number"
+                    },
+                    "observacao": {
+                      "type": "string"
+                    },
+                    "pedido_produtos": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "produto_id": {
+                            "type": "number"
+                          },
+                          "quantidade_produto": {
+                            "type": "number"
+                          }
+                        },
+                        "required": ["produto_id", "quantidade_produto"],
+                        "example": {
+                          "produto_id": 28,
+                          "quantidade_produto": 1
+                        }
+                      }
+                    }
+                  },
+                  "required": ["cliente_id", "pedido_produtos"],
+                  "example": {
+                    "cliente_id": 9,
+                    "observacao": "Em caso de ausência, recomendo deixar com algum vizinho",
+                    "pedido_produtos": [
+                      {
+                        "produto_id": 28,
+                        "quantidade_produto": 1
+                      },
+                      {
+                        "produto_id": 27,
+                        "quantidade_produto": 1
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "401": {
+              "description": "Usuário não autorizado"
+            },
+            "400": {
+              "description": "Todos dados são obrigatórios"
+            },
+            "200": {
+              "description": "OK"
+            }
+          }
+        },
+        "get":{
+          "description": "Rota para listar todos os pedidos",
+          "sumary": "",
+          "security": [{"bearerAuth": []}],
+          "tags": ["Pedido"],
+          
+        "responses": {
+          "401": {
+            "description": "Usuario não logado"
+          },
+          "200": {
+            "description": "OK"
+          }
+        }
+  
+        }
+      }
+
+    }
+    }
+  
+
+
+
