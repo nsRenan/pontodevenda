@@ -2,8 +2,8 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Products",
-    "description": "Documentation from products api",
-    "version": "1.0.0"
+    "description": "Documentação da API de um ponto de venda",
+    "version": "2.0.0"
   },
   "basePath": "/",
 
@@ -21,7 +21,7 @@
     "/categoria": {
       "get": {
         "description": "Rota para listar todas as categorias de produtos",
-        "sumary": "",
+        "summary": "Listar Categorias",
         "tags": ["Categorias"],
         "responses": {
           "200": {
@@ -32,7 +32,7 @@
     },
     "/login": {
       "post": {"description": "Rota de login",
-      "sumary": "",
+      "summary": "Login",
       "tags": ["Login"],
       "requestBody": {
         "content": {
@@ -69,7 +69,7 @@
     "/usuario": {
       "post": {
         "description": "Rota para cadastrar um novo usuario",
-        "sumary": "",
+        "summary": "Cadastrar Usuario",
         "tags": ["Usuario"],
         "requestBody": {
           "content": {
@@ -107,8 +107,8 @@
       }
       },
       "get":{
-        "description": "Rota para detalhar perfil do usuario logado",
-        "sumary": "",
+        "description": "Rota para detalhar o perfil do usuario logado",
+        "summary": "Detalhar Usuario",
         "security": [{"bearerAuth": []}],
         "tags": ["Usuario"],
         
@@ -124,7 +124,7 @@
       },
       "put":{
         "description": "Rota para atualizar perfil do usuario logado",
-        "sumary": "",
+        "summary": "Atualizar Dados Usuario",
         "security": [{"bearerAuth": []}],
         "tags": ["Usuario"],
         "requestBody": {
@@ -168,8 +168,8 @@
       }
     },
     "/produto": {
-      "post": {"description": "Rota de cadastro de produto",
-      "sumary": "",
+      "post": {"description": "Rota para cadastro de um novo produto",
+      "summary": "Cadastrar Produto",
       "tags": ["Produto"],
       "security": [{"bearerAuth": []}],
       "requestBody": {
@@ -215,7 +215,7 @@
       },
       "get":{
         "description": "Rota para listar todos produtos de uma categoria",
-        "sumary": "",
+        "summary": "Listar Produtos",
         "security": [{"bearerAuth": []}],
         "tags": ["Produto"],
         "parameters": [
@@ -252,7 +252,8 @@
     },
     "/produto/{id}": {
       "put": {
-        "summary": "Atualizar informações do produto",
+        "description": "Rota para atualizar os dados de um produto",
+        "summary": "Atualizar Dados Produto",
         "tags": ["Produto"],
         "security": [{"bearerAuth": []}],
         "parameters": [
@@ -316,6 +317,7 @@
         }
       },
       "get": {
+        "description": "Rota para detealhar um produto",
         "summary": "Detalhar Produto ",
         "tags": ["Produto"],
         "security": [{"bearerAuth": []}],
@@ -351,6 +353,7 @@
         }
       },
       "delete" : {
+        "description": "Rota para deletar um produto",
         "summary": "Deletar Produto ",
         "tags": ["Produto"],
         "security": [{"bearerAuth": []}],
@@ -389,8 +392,9 @@
       },
 
       "/cliente": {
-        "post": {"description": "Rota de cadastro de clientes",
-        "sumary": "",
+        "post": {
+        "description": "Rota de cadastro de clientes",
+        "summary": "Cadastrar Cliente",
         "tags": ["Cliente"],
         "security": [{"bearerAuth": []}],
         "requestBody": {
@@ -432,7 +436,7 @@
         },
         "get":{
           "description": "Rota para listar os clientes cadastrados",
-          "sumary": "",
+          "summary": "Listar Clientes",
           "security": [{"bearerAuth": []}],
           "tags": ["Cliente"],
           
@@ -449,7 +453,8 @@
       },
       "/cliente/{id}": {
         "put": {
-          "summary": "Atualizar informações do cliente",
+          "description": "Rota para atualizar dados de um cliente",
+          "summary": "Atualizar Dados Cliente",
           "tags": ["Cliente"],
           "security": [{"bearerAuth": []}],
           "parameters": [
@@ -509,6 +514,7 @@
           }
         },
         "get": {
+          "description": "Rota para detalhar um cliente",
           "summary": "Detalhar Cliente ",
           "tags": ["Cliente"],
           "security": [{"bearerAuth": []}],
@@ -547,7 +553,8 @@
 
       "/pedido": {
         "post": {
-          "description": "Rota de cadastro de pedido",
+          "description": "Rota de cadastro de um novo pedido",
+          "summary": "Cadastrar Pedido",
           "tags": ["Pedido"],
           "security": [{"bearerAuth": []}],
           "requestBody": {
@@ -615,7 +622,7 @@
         },
         "get":{
           "description": "Rota para listar todos os pedidos",
-          "sumary": "",
+          "summary": "Listar Pedidos",
           "security": [{"bearerAuth": []}],
           "tags": ["Pedido"],
           
