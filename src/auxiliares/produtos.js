@@ -47,12 +47,12 @@ const uploadImagemProduto = async (req) => {
   const upload = await s3
     .send(new PutObjectCommand({
       Bucket: process.env.BACKBLAZE_BUCKET,
-      Key: file.originalname,
+      Key: 'produtos/' + file.originalname,
       Body: file.buffer,
       ContentType: file.mimetype,
     }))
 
-  return  `https://${process.env.BACKBLAZE_BUCKET}.s3.${process.env.REGION}.backblazeb2.com/${file.originalname}`;
+  return  `https://${process.env.BACKBLAZE_BUCKET}.s3.${process.env.REGION}.backblazeb2.com/produtos/${file.originalname}`;
 };
 
 const selecionarProdutoPorId = async (idProduto) => {
