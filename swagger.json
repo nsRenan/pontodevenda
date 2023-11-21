@@ -2,8 +2,13 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Products",
-    "description": "Documentação da API de um ponto de venda",
-    "version": "2.0.0"
+    "description": "Documentação da API de um ponto de venda" ,     
+    "version": "2.0.0",
+    "contact": {
+      "name": "Repositório",
+      "url": "https://github.com/nsRenan/pontodevenda"
+    }
+
   },
   "basePath": "/",
 
@@ -168,51 +173,78 @@
       }
     },
     "/produto": {
-      "post": {"description": "Rota para cadastro de um novo produto",
-      "summary": "Cadastrar Produto",
-      "tags": ["Produto"],
-      "security": [{"bearerAuth": []}],
-      "requestBody": {
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "descricao": {
-                  "type": "string"
-                },
-                "quantidade_estoque": {
-                  "type": "number"
-                },
-                "valor": {
-                  "type": "number"
-                },
-                "categoria_id": {
-                  "type": "number"
+      "post": {
+        "description": "Rota para cadastro de um novo produto",
+        "summary": "Cadastrar Produto",
+        "tags": ["Produto"],
+        "security": [{"bearerAuth": []}],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "descricao": {
+                    "type": "string"
+                  },
+                  "quantidade_estoque": {
+                    "type": "number"
+                  },
+                  "valor": {
+                    "type": "number"
+                  },
+                  "categoria_id": {
+                    "type": "number"
+                  },
+                  "imagem": {
+                    "type": "string",
+                    "format": "binary"
+                  }
                 }
-              },
-              "example": {
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "descricao": {
+                    "type": "string"
+                  },
+                  "quantidade_estoque": {
+                    "type": "number"
+                  },
+                  "valor": {
+                    "type": "number"
+                  },
+                  "categoria_id": {
+                    "type": "number"
+                  }
+                },
+                "example": {
                   "descricao": "Moto G8 Plus",
                   "quantidade_estoque": 10,
                   "valor": 150000,
                   "categoria_id": 2
+                }
               }
             }
           }
+        },
+        "responses": {
+          "401": {
+            "description": "Usuario não autorizado"
+          },
+          "400": {
+            "description": "Todos dados são obrigatorios"
+          },
+          "200": {
+            "description": "OK"
+          }
         }
       },
-      "responses": {
-        "401": {
-          "description": "Usuario não autorizado"
-        },
-        "400": {
-          "description": "Todos dados são obrigatorios"
-        },
-        "200": {
-          "description": "OK"
-        }
-      }
-      },
+    
+    
+    
       "get":{
         "description": "Rota para listar todos produtos de uma categoria",
         "summary": "Listar Produtos",
@@ -277,6 +309,29 @@
         ],
         "requestBody": {
           "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "descricao": {
+                    "type": "string"
+                  },
+                  "quantidade_estoque": {
+                    "type": "number"
+                  },
+                  "valor": {
+                    "type": "number"
+                  },
+                  "categoria_id": {
+                    "type": "number"
+                  },
+                  "imagem": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            },
             "application/json": {
               "schema": {
                 "type": "object",
@@ -285,18 +340,18 @@
                     "type": "string"
                   },
                   "quantidade_estoque": {
-                    "type": "integer"
+                    "type": "number"
                   },
                   "valor": {
                     "type": "number"
                   },
                   "categoria_id": {
-                    "type": "integer"
+                    "type": "number"
                   }
                 },
                 "example": {
                   "descricao": "Moto G8 Plus",
-                  "quantidade_estoque": 8,
+                  "quantidade_estoque": 10,
                   "valor": 150000,
                   "categoria_id": 2
                 }
@@ -306,10 +361,10 @@
         },
         "responses": {
           "401": {
-            "description": "Usuário não autorizado"
+            "description": "Usuario não autorizado"
           },
           "400": {
-            "description": "Produto não encontrado"
+            "description": "Todos dados são obrigatorios"
           },
           "200": {
             "description": "OK"
