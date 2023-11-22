@@ -14,7 +14,7 @@ A aplicação conta com diversas funcionalidades, permitindo ao usuário se cada
 
 ## Tecnologias Utilizadas
 
-[![My Skills](https://skillicons.dev/icons?i=js,nodejs,postman,express,git,github,postgres,swagger)](https://skillicons.dev)
+[![My Skills](https://skillicons.dev/icons?i=js,nodejs,postman,express,jest,git,github,postgres,swagger)](https://skillicons.dev)
 
 
 ## Funcionalidades
