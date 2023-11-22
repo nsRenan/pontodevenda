@@ -32,5 +32,9 @@
 4. Inicie o servidor com `npm run dev`.
 5. Acesse `http://localhost:3000/`
 6. Para acessar o Swagger com a documentação acesse `http://localhost:3000/api-docs`
+
+
+## Deploy  
+### [Link Swagger](https://fair-plum-cow.cyclic.app/api-docs)
    
 
