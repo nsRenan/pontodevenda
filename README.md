@@ -332,7 +332,7 @@ Este projeto foi documentado utilizando o Swagger.
 ![](media/swagger.gif)
 
 
-Para visualizar o Swagger no servidor utilize [Swagger](https://fair-plum-cow.cyclic.app/api-docs)
+Para visualizar o Swagger no servidor utilize [Swagger](https://pontodevenda.onrender.com/api-docs/)
 
 Para acessar a documentação localmente, inicialize o projeto com `npm run dev`;
 
