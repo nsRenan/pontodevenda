@@ -253,10 +253,10 @@
         "parameters": [
           {
             "in": "query",
-            "name": "Categoria Para consulta",
+            "name": "categoria_id",
             "description": "Passe o id sa categoria para listar todos os produtos pertencentes",
             "required": true,
-            "type": "string",
+            "type": "number",
             "examples": {
               "Exemplo1": {
                 "value": "1"
